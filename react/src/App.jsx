@@ -23,10 +23,12 @@ function App() {
     const fetchData = async () => {
         try {
           const response = await fetch(import.meta.env.VITE_SOCKS_API_URL);
+          
             if (!response.ok) {
                 throw new Error('Data could not be fetched!');
             }
             const json_response = await response.json();
+            console.log(json_response);
             setData(json_response); // assign JSON response to the data variable.
         } catch (error) {
             console.error('Error fetching socks:', error);

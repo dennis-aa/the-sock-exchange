@@ -26,7 +26,6 @@ const Search = (props) => {
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
-        console.log(searchTerm);
     };
 
     return (
