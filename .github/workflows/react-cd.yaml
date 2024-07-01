@@ -41,4 +41,4 @@ jobs:
 
       - name: Sync build directory to S3
         run: |
-          aws s3 sync ./react/dist s3://the-sock-exchange-react --delete
+          aws s3 sync ./react/dist s3://sock-exchange-react --delete
