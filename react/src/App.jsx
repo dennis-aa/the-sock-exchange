@@ -5,6 +5,9 @@ import Promo from "./components/Promo";
 import Home from "./components/Home";
 import About from "./components/About";
 import AddSock from "./components/AddSock";
+import { AuthProvider } from "./hooks/AuthContext";
+import RequireAuth from "./components/RequireAuth";
+import LoginForm from "./components/LoginForm";
 import {
   BrowserRouter as Router,
   Route,
@@ -76,7 +79,7 @@ const handleDelete = async (sockId) => {
               </Link>
               </li>
               <li className="nav-item">
-              <Link className="nav-link" to="/add-sock">
+              <Link className="nav-link" to="/add">
                   Add Sock
               </Link>
               </li>
@@ -106,11 +109,18 @@ const handleDelete = async (sockId) => {
             Both socks and space rockets 🚀 will take you to new heights, but only one will get cold feet!
             <Featured data={promo_data}/>
             <hr />
-            <Routes>
-            <Route exact path="/" element={<Home data={data} handleDelete={handleDelete} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/add-sock" element={<AddSock/>} />
-            </Routes>
+            <AuthProvider>
+<Routes>
+    <Route exact path="/" element={<Home data={data} handleDelete={handleDelete}  />} />
+    <Route path="/about" element={<About />} />
+    <Route path="/add" element={
+    <RequireAuth>
+        <AddSock />
+    </RequireAuth>
+    } />
+    <Route path="/Login" element={<LoginForm />} />
+</Routes>
+</AuthProvider>
             <Footer environment={import.meta.env.VITE_ENVIRONMENT.toUpperCase()}/>
           </div>
         </div>
